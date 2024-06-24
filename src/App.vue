@@ -32,6 +32,10 @@ const refList = shallowRef<Expose>();
 
 const running = ref(false);
 
+addOverlayListener('LogLine', (data) => {
+	const {rawLine} = data;
+});
+
 function start () {
 	running.value = true;
 	

@@ -1,15 +1,17 @@
 import {IRow} from "@/type";
-import {parsed15or16} from "@/regexes";
-import Damage from "@/Damage";
+import {network21or22} from "@/regexes";
+import Damage from '@/libs/ngld/Damage';
+import PostNamazu from "@/libs/ngld/PostNamazu";
 import _ from 'lodash-es';
 import {IThan} from "@/dict";
 
 export class Bus {
 	
 	public rules: IRow[] = [];
+	public debug: boolean = false;
 	
 	constructor() {
-
+	
 	}
 	
 	start (rules: IRow[]) {
@@ -20,8 +22,12 @@ export class Bus {
 		this.rules = [];
 	}
 	
+	postNamazu(echo: string) {
+		PostNamazu('command', echo);
+	}
+	
 	handle (log: string) {
-		const match = parsed15or16(log);
+		const match = network21or22(log);
 		if (match) {
 			const {
 				source: player,
@@ -32,35 +38,45 @@ export class Bus {
 			} = match.groups || {};
 			
 			const damage = Damage.damage(_damage).toString();
-			const flags = Damage.flagsMask(_flags);
+			const flags = Damage.flags(_flags) || '00';
 			
-			console.log(player, skill, damage, flags);
+			if (this.debug) console.log(player, skill, damage, flags);
 			
 			this.rules.map((row) => {
-				const result = _.every([
-					this.__player(player, row.player),
-					// this.__target(target, row.target),
-					this.__skill(skill, row.skill),
-					this.__damage(damage, row.damage, row.than),
-					this.__flags(flags, row.flag),
-				]);
-				console.log(row, result);
+				if (row.echo) {
+					const result = _.every([
+						this.__player(player, row.player),
+						// this.__target(target, row.target),
+						this.__skill(skill, row.skill),
+						this.__damage(damage, row.damage, row.than),
+						this.__flags(flags, row.flag),
+					]);
+					if (this.debug) console.log(row, result);
+					if (result) {
+						const txt = row.echo
+							.replace(/\$\{player\}/g, player)
+							.replace(/\$\{skill\}/g, skill)
+							.replace(/\$\{damage\}/g, damage)
+						
+						this.postNamazu(txt);
+					}
+				}
 			});
 		}
 	}
 	
 	private __player (log: string, v: string) {
-		console.log('[player]', ...arguments);
+		if (this.debug) console.log('[player]', ...arguments);
 		return v? v === log: true;
 	}
 	
 	private __skill (log: string, v: string) {
-		console.log('[skill]', ...arguments);
+		if (this.debug) console.log('[skill]', ...arguments);
 		return v? v === log: true;
 	}
 	
 	private __damage (log: string, v: string, than: IThan) {
-		console.log('[damage]', ...arguments);
+		if (this.debug) console.log('[damage]', ...arguments);
 		if (!v) {
 			return true;
 		} else {
@@ -77,7 +93,7 @@ export class Bus {
 	}
 	
 	private __flags (log: string, v: string) {
-		console.log('[flags]', ...arguments);
+		if (this.debug) console.log('[flags]', ...arguments);
 		return v? v === log: true;
 	}
 }
