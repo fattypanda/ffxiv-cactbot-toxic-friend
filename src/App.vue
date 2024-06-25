@@ -1,35 +1,38 @@
 <template>
-	<div class="container">
-		<div class="header">
-			<div class="left">
-				<el-button-group>
-					<template v-if="running">
-						<el-button type="primary" @click="restart">重启</el-button>
-						<el-button type="primary" @click="stop">停止</el-button>
-						<el-button type="primary" @click="test">测试</el-button>
-					</template>
-					<template v-else>
-						<el-button type="primary" @click="start">启动</el-button>
-					</template>
-				</el-button-group>
+	<el-config-provider :locale="zhCn" size="small">
+		<div class="container">
+			<div class="header">
+				<div class="left">
+					<el-button-group>
+						<template v-if="running">
+							<el-button type="primary" @click="restart">重启</el-button>
+							<el-button type="primary" @click="stop">停止</el-button>
+							<el-button type="primary" @click="test">测试</el-button>
+						</template>
+						<template v-else>
+							<el-button type="primary" @click="start">启动</el-button>
+						</template>
+					</el-button-group>
+				</div>
+				<div class="right">
+					<el-button-group>
+						<el-button type="primary" @click="() => importData()">导入</el-button>
+						<el-button type="primary" @click="() => exportData()">导出</el-button>
+						<el-button type="primary" @click="() => save()">保存</el-button>
+						<el-button type="primary" @click="() => open()">新增</el-button>
+					</el-button-group>
+				</div>
 			</div>
-			<div class="right">
-				<el-button-group>
-					<el-button type="primary" @click="() => importData()">导入</el-button>
-					<el-button type="primary" @click="() => exportData()">导出</el-button>
-					<el-button type="primary" @click="() => save()">保存</el-button>
-					<el-button type="primary" @click="() => open()">新增</el-button>
-				</el-button-group>
+			<div class="body">
+				<List ref="refList" />
 			</div>
 		</div>
-		<div class="body">
-			<List ref="refList" />
-		</div>
-	</div>
+	</el-config-provider>
 </template>
 
 <script setup lang="tsx">
 import {nextTick, ref, shallowRef} from "vue";
+import zhCn from "element-plus/es/locale/lang/zh-cn"
 import List, {Expose} from "@/components/list.vue";
 import {Bus} from "@/Bus";
 import {parsed15or16} from "@/regexes";

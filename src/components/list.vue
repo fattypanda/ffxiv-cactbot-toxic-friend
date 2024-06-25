@@ -94,7 +94,7 @@ const refTable = shallowRef<TableInstance>();
 const data = ref<Partial<IRow>[]>([]);
 
 const all = computed(() => {
-	return data.value.every(({use}) => use);
+	return data.value.length === 0? false: data.value.every(({use}) => use);
 });
 const indeterminate = computed(() => {
 	return data.value.some(({use}) => use);
