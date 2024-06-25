@@ -4,6 +4,7 @@ import Damage from '@/libs/ngld/Damage';
 import PostNamazu from "@/libs/ngld/PostNamazu";
 import _ from 'lodash-es';
 import {IThan} from "@/dict";
+import {Listener} from "@/libs/ngld/globals";
 
 export class Bus {
 	
@@ -16,18 +17,24 @@ export class Bus {
 	
 	start (rules: IRow[]) {
 		this.rules = rules;
+		addOverlayListener('LogLine', this.handleLogLine);
 	}
 	
 	stop () {
 		this.rules = [];
+		removeOverlayListener('LogLine', this.handleLogLine);
+	}
+	
+	handleLogLine (data: Parameters<Listener.LogLine.Callback>[0]) {
+		if (data?.rawLine) this.handle(data.rawLine);
 	}
 	
 	postNamazu(echo: string) {
 		PostNamazu('command', echo);
 	}
 	
-	handle (log: string) {
-		const match = network21or22(log);
+	handle (log: string, analysis = network21or22) {
+		const match = analysis(log);
 		if (match) {
 			const {
 				source: player,

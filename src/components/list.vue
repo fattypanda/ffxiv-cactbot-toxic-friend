@@ -59,33 +59,39 @@
 </template>
 
 <script setup lang="tsx">
-import {computed, nextTick, ref, shallowRef, unref, toRaw} from "vue";
-import {TableInstance} from "element-plus";
+import {computed, nextTick, ref, shallowRef, unref, toRaw, onMounted} from "vue";
+import {ElMessage, TableInstance} from "element-plus";
 import AInputAction from "@/atoms/input-action";
 import options from '@/dict';
 import {rowToRule} from "@/hooks";
 import {IRow} from "@/type";
-import {uniqueId} from "lodash-es";
+import {download} from "@/utils";
+
+import {uniqueId, unset, map} from "lodash-es";
+import {showOpenFilePicker} from "file-system-access";
 
 const createId = () => uniqueId('id-');
 
+const createForm = (row: Partial<IRow>, cid = true) => ({
+	...(cid? { id: createId()}: {}),
+	use: false,
+	echo: `/p $\{player} 使用了 $\{skill} ，直暴了 $\{damage} 点伤害。`,
+	player: '',
+	skill: '',
+	damage: '10000',
+	flag: '60',
+	than: '>',
+	...row,
+} as IRow);
+
 const defaults = {
 	form (cid = false) {
-		return {
-			...(cid? { id: createId()}: {}),
-			use: false,
-			echo: `/p $\{player} 使用了 $\{skill} ，直暴了 $\{damage} 点伤害。`,
-			player: '',
-			skill: '',
-			damage: '10000',
-			flag: '60',
-			than: '>',
-		} as IRow;
+		return createForm({}, cid);
 	}
 }
 
 const refTable = shallowRef<TableInstance>();
-const data = ref<Partial<IRow>[]>([defaults.form(true)]);
+const data = ref<Partial<IRow>[]>([]);
 
 const all = computed(() => {
 	return data.value.every(({use}) => use);
@@ -146,8 +152,76 @@ function getUseRows () {
 	return data.value.filter(v => v.use).map(v => toRaw(v));
 }
 
+function getData () {
+	return data.value.map(v => {
+		const row = toRaw(v);
+		unset(row, 'id');
+		return row;
+	});
+}
+
+function setData (_data: Partial<IRow>[]) {
+	data.value = map(_data, row => ({
+		...row,
+		id: createId(),
+	}));
+}
+
+function save () {
+	localStorage.setItem('rules',  JSON.stringify(getData()));
+}
+
+function importData () {
+	try {
+		showOpenFilePicker({
+			types: [{accept: {'application/json': ['.json']}}],
+			excludeAcceptAllOption: true,
+			multiple: false,
+		}).then(async ([handle]) => {
+			const file = await handle.getFile();
+			const content = await file.text();
+			const last = JSON.parse(content);
+			setData(last);
+		});
+	} catch (err) {
+		ElMessage.error({message: (err as Error).message});
+	}
+}
+
+function exportData () {
+	save();
+	download(getData(), 'rule.json');
+}
+
+function useDefaultData () {
+	data.value = [
+		defaults.form(true),
+		createForm({
+			use: true,
+			skill: '攻击',
+			flag: '60',
+			damage: '0',
+			than: '>',
+			echo: '/p $\{player} 居然浪费了宝贵的直暴在普通攻击上！而且仅仅造成了 $\{damage} 点伤害。'
+		}, true)
+	];
+}
+
+onMounted(() => {
+	const last = JSON.parse(localStorage.getItem('rules') || '[]') as IRow[];
+	if (last.length > 0) {
+		setData(last);
+	} else {
+		useDefaultData();
+	}
+});
+
 const expose = {
+	save,
 	open,
+	importData,
+	exportData,
+	useDefaultData,
 	getUseRows,
 }
 
