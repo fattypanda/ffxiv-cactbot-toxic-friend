@@ -4,7 +4,6 @@ import Damage from '@/libs/ngld/Damage';
 import PostNamazu from "@/libs/ngld/PostNamazu";
 import _ from 'lodash-es';
 import {IThan} from "@/dict";
-import {Listener} from "@/libs/ngld/globals";
 
 export class Bus {
 	
@@ -26,7 +25,7 @@ export class Bus {
 		removeOverlayListener('LogLine', this.handleLogLine);
 	}
 	
-	handleLogLine = (data: Parameters<Listener.LogLine.Callback>[0]) => {
+	handleLogLine = (data: any) => {
 		if (data?.rawLine) this.handle(data.rawLine);
 	}
 	
