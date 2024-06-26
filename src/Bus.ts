@@ -12,12 +12,13 @@ export class Bus {
 	public debug: boolean = false;
 	
 	constructor() {
-	
+
 	}
 	
 	start (rules: IRow[]) {
 		this.rules = rules;
 		addOverlayListener('LogLine', this.handleLogLine);
+		startOverlayEvents();
 	}
 	
 	stop () {
@@ -25,7 +26,7 @@ export class Bus {
 		removeOverlayListener('LogLine', this.handleLogLine);
 	}
 	
-	handleLogLine (data: Parameters<Listener.LogLine.Callback>[0]) {
+	handleLogLine = (data: Parameters<Listener.LogLine.Callback>[0]) => {
 		if (data?.rawLine) this.handle(data.rawLine);
 	}
 	
@@ -58,7 +59,8 @@ export class Bus {
 						this.__damage(damage, row.damage, row.than),
 						this.__flags(flags, row.flag),
 					]);
-					if (this.debug) console.log(row, result);
+					// if (this.debug) console.log(row, result);
+					console.log(row, result);
 					if (result) {
 						const txt = row.echo
 							.replace(/\$\{player\}/g, player)

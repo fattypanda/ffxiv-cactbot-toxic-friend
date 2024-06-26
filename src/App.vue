@@ -87,6 +87,8 @@ const bus = new Bus();
 
 <style lang="less" scoped>
 .container {
+	pointer-events: initial;
+
 	width: 100%;
 	height: 100%;
 	
