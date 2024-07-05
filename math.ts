@@ -5,7 +5,7 @@ serve((req) => {
 	const url = new URL(req.url);
 	
 	// Redirect root to /index.html
-	if (url.pathname === "/") {
+	if (url.pathname === "/" || url.pathname === "") {
 		url.pathname = "/index.html";
 	}
 	
