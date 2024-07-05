@@ -177,7 +177,7 @@ function importData () {
 			types: [{accept: {'application/json': ['.json']}}],
 			excludeAcceptAllOption: true,
 			multiple: false,
-		}).then(async ([handle]) => {
+		} as any).then(async ([handle]) => {
 			const file = await handle.getFile();
 			const content = await file.text();
 			const last = JSON.parse(content);
