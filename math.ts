@@ -9,5 +9,5 @@ serve((req) => {
 		url.pathname = "/index.html";
 	}
 	
-	return serveDir(req, { fsRoot: "public", url: url.toString() });
+	return serveDir(req, { fsRoot: "dist", url: url.toString() });
 });
