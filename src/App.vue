@@ -5,21 +5,21 @@
 				<div class="left">
 					<el-button-group>
 						<template v-if="running">
-							<el-button type="primary" @click="restart">重启</el-button>
-							<el-button type="primary" @click="stop">停止</el-button>
-							<el-button type="primary" @click="test">测试</el-button>
+							<el-button type="primary" text @click="restart">重启</el-button>
+							<el-button type="primary" text @click="stop">停止</el-button>
+							<el-button type="primary" text @click="test">测试</el-button>
 						</template>
 						<template v-else>
-							<el-button type="primary" @click="start">启动</el-button>
+							<el-button type="primary" text @click="start">启动</el-button>
 						</template>
 					</el-button-group>
 				</div>
 				<div class="right">
 					<el-button-group>
-						<el-button type="primary" @click="() => importData()">导入</el-button>
-						<el-button type="primary" @click="() => exportData()">导出</el-button>
-						<el-button type="primary" @click="() => save()">保存</el-button>
-						<el-button type="primary" @click="() => open()">新增</el-button>
+						<el-button type="primary" text @click="() => importData()">导入</el-button>
+						<el-button type="primary" text @click="() => exportData()">导出</el-button>
+						<el-button type="primary" text @click="() => save()">保存</el-button>
+						<el-button type="primary" text @click="() => open()">新增</el-button>
 					</el-button-group>
 				</div>
 			</div>

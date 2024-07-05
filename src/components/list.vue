@@ -16,9 +16,9 @@
 		<el-table-column label="行为" prop="echo" min-width="300" align="center" />
 		<el-table-column label="操作" width="160" align="center" fixed="right">
 			<template #default="{row}">
-				<el-button type="primary" @click="() => open(row)">编辑</el-button>
-				<el-button type="warning" @click="() => copy(row)">复制</el-button>
-				<el-button type="danger" @click="() => del(row)">删除</el-button>
+				<el-button type="primary" text @click="() => open(row)">编辑</el-button>
+				<el-button type="warning" text @click="() => copy(row)">复制</el-button>
+				<el-button type="danger" text @click="() => del(row)">删除</el-button>
 			</template>
 		</el-table-column>
 	</el-table>
