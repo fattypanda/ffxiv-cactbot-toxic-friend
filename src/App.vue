@@ -47,7 +47,7 @@ function start () {
 	save();
 	
 	const rules = refList.value?.getUseRows();
-	bus.start(rules);
+	bus.start(rules as any);
 }
 
 function restart () {
