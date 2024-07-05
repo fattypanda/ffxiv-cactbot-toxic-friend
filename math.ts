@@ -5,9 +5,13 @@ serve((req) => {
 	const url = new URL(req.url);
 	
 	// Redirect root to /index.html
-	if (url.pathname === "/" || url.pathname === "") {
+	if (url.pathname === "/") {
 		url.pathname = "/index.html";
 	}
-	
-	return serveDir(req, { fsRoot: "dist", url: url.toString() });
+	return serveDir(req, {
+		fsRoot: "dist",
+		urlRoot: "",
+		showDirListing: true,
+		enableCors: true
+	});
 });
