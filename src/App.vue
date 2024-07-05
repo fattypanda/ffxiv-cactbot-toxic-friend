@@ -104,6 +104,8 @@ const bus = new Bus();
 		align-content: center;
 		padding: 0 12px;
 		box-sizing: border-box;
+		
+		background: rgba(0, 0, 0, .6);
 	}
 }
 </style>

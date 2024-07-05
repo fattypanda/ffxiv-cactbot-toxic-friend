@@ -1,6 +1,6 @@
 <template>
 	<el-table ref="refTable" :data="data" border>
-		<el-table-column width="50" align="center" fixed="left">
+		<el-table-column width="30" align="center" fixed="left">
 			<template #header>
 				<el-checkbox :model-value="all" :indeterminate="all? false: indeterminate" @change="handleAll" />
 			</template>
@@ -14,7 +14,7 @@
 			</template>
 		</el-table-column>
 		<el-table-column label="行为" prop="echo" min-width="300" align="center" />
-		<el-table-column label="操作" width="190" align="center" fixed="right">
+		<el-table-column label="操作" width="160" align="center" fixed="right">
 			<template #default="{row}">
 				<el-button type="primary" @click="() => open(row)">编辑</el-button>
 				<el-button type="warning" @click="() => copy(row)">复制</el-button>
@@ -154,7 +154,7 @@ function getUseRows () {
 
 function getData () {
 	return data.value.map(v => {
-		const row = toRaw(v);
+		const row = {...toRaw(v)};
 		unset(row, 'id');
 		return row;
 	});

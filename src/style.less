@@ -1,10 +1,11 @@
 html, body, #app {
 	width: 100%;
 	height: 100%;
-	background: rgab(0, 0, 0, 0);
 }
 
 html, body {
+
+	//background: white;
 
 	.el-dialog {
 		--el-dialog-border-radius: 0;
@@ -15,6 +16,22 @@ html, body {
 	}
 
 	--el-border-radius-base: 0;
+	--el-bg-color: rgba(0, 0, 0, .3);
 
+	.el-table {
+		--el-table-header-text-color: var(--el-text-color-primary);
+	}
+
+	.el-table--small .el-table__cell {
+		padding: 0;
+	}
+
+	.el-table--small .cell {
+		padding: 0 2px;
+	}
+
+	.el-button+.el-button {
+		margin-left: 1px;
+	}
 }
 
