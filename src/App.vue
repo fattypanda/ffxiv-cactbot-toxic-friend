@@ -21,11 +21,16 @@
 						<el-button type="primary" text @click="() => save()">保存</el-button>
 						<el-button type="primary" text @click="() => open()">新增</el-button>
 					</el-button-group>
+					<el-button type="primary" text @click="() => show = !show">
+						{{show? '折叠': '展开'}}
+					</el-button>
 				</div>
 			</div>
-			<div class="body">
-				<List ref="refList" />
-			</div>
+			<transition name="el-zoom-in-top">
+				<div v-show="show" class="body">
+					<List ref="refList" />
+				</div>
+			</transition>
 		</div>
 	</el-config-provider>
 </template>
@@ -40,6 +45,7 @@ import {parsed15or16} from "@/regexes";
 const refList = shallowRef<Expose>();
 
 const running = ref(false);
+const show = ref(false);
 
 function start () {
 	running.value = true;

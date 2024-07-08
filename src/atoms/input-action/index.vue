@@ -69,12 +69,12 @@ export default {
 	align-content: baseline;
 	
 	.option--value {
-		color: #333;
+		color: var(--el-text-color-primary);
 		font-size: 14px;
 	}
 	
 	.option--description {
-		color: #999;
+		color: var(--el-text-color-regular);
 		font-size: 12px;
 	}
 }

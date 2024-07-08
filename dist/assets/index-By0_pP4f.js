@@ -29583,7 +29583,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const AInputAction$1 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-a5b0a091"]]);
+const AInputAction$1 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-3692c895"]]);
 const AInputAction = /* @__PURE__ */ defineComponent(AInputAction$1);
 const flag = [
   { label: "无", value: "00" },
@@ -29725,7 +29725,7 @@ async function showOpenFilePicker(opts = {}) {
   input.style.top = "-100000px";
   input.style.left = "-100000px";
   document.body.appendChild(input);
-  const { makeFileHandlesFromFileList } = await __vitePreload(() => import("./util-CfIa3Bdp.js"), true ? __vite__mapDeps([]) : void 0, import.meta.url);
+  const { makeFileHandlesFromFileList } = await __vitePreload(() => import("./util-B90a73bb.js"), true ? __vite__mapDeps([]) : void 0, import.meta.url);
   return new Promise((resolve2, reject2) => {
     input.addEventListener("change", () => {
       makeFileHandlesFromFileList(input.files).then(resolve2).catch(reject2);
@@ -30174,8 +30174,8 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
         modelValue: visible.value,
         "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => visible.value = $event),
         width: "80%",
-        "lock-scroll": "",
-        "show-close": false
+        "show-close": false,
+        "align-center": ""
       }, {
         footer: withCtx(() => [createVNode(_component_el_button, {
           onClick: close
@@ -30425,6 +30425,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const refList = shallowRef();
     const running = ref(false);
+    const show = ref(false);
     function start() {
       var _a2;
       running.value = true;
@@ -30535,16 +30536,28 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             _: 1
           })]),
           _: 1
-        })])]), createBaseVNode("div", _hoisted_5, [createVNode(_sfc_main$1, {
-          ref_key: "refList",
-          ref: refList
-        }, null, 512)])])]),
+        }), createVNode(_component_el_button, {
+          type: "primary",
+          text: "",
+          onClick: _cache[4] || (_cache[4] = () => show.value = !show.value)
+        }, {
+          default: withCtx(() => [createTextVNode(toDisplayString(show.value ? "折叠" : "展开"), 1)]),
+          _: 1
+        })])]), createVNode(Transition, {
+          name: "el-zoom-in-top"
+        }, {
+          default: withCtx(() => [withDirectives(createBaseVNode("div", _hoisted_5, [createVNode(_sfc_main$1, {
+            ref_key: "refList",
+            ref: refList
+          }, null, 512)], 512), [[vShow, show.value]])]),
+          _: 1
+        })])]),
         _: 1
       }, 8, ["locale"]);
     };
   }
 });
-const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-7d32f118"]]);
+const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-967236c6"]]);
 createApp(App).mount("#app");
 export {
   FileSystemFileHandle$1 as F,

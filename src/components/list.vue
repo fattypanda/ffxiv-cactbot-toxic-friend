@@ -23,7 +23,7 @@
 		</el-table-column>
 	</el-table>
 	
-	<el-dialog v-model="visible" width="80%" lock-scroll :show-close="false">
+	<el-dialog v-model="visible" width="80%" :show-close="false" align-center>
 		<el-form :model="form">
 			<el-form-item label="伤害">
 				<div style="width: 100%; display: grid; grid-template-columns: 100px 1fr; grid-gap: 16px;">
