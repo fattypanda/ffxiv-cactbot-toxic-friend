@@ -1,10 +1,11 @@
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = ["./memory-CoF3QhKB.js","./index-By0_pP4f.js","./index-BBxSUQR4.css"]
+    __vite__mapDeps.viteFileDeps = ["./memory-BgIWg3VE.js","./support-Blx7VymJ.js","./zh-cn-CoCz9NQl.js","./zh-cn-IQloFejv.css","./support-DfrMkNo-.css"]
   }
   return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
 }
-import { _ as __vitePreload } from "./index-By0_pP4f.js";
+import { m as __vitePreload } from "./support-Blx7VymJ.js";
+import "./zh-cn-CoCz9NQl.js";
 const errors = {
   INVALID: ["seeking position failed.", "InvalidStateError"],
   GONE: ["A requested file or directory could not be found at the time an operation was processed.", "NotFoundError"],
@@ -20,8 +21,8 @@ const isChunkObject = (chunk) => {
 };
 async function makeDirHandleFromFileList(fileList) {
   var _a, _b, _c;
-  const { FolderHandle, FileHandle } = await __vitePreload(() => import("./memory-CoF3QhKB.js"), true ? __vite__mapDeps([0,1,2]) : void 0, import.meta.url);
-  const { FileSystemDirectoryHandle } = await __vitePreload(() => import("./index-By0_pP4f.js").then((n) => n.a), true ? __vite__mapDeps([1,2]) : void 0, import.meta.url);
+  const { FolderHandle, FileHandle } = await __vitePreload(() => import("./memory-BgIWg3VE.js"), true ? __vite__mapDeps([0,1,2,3,4]) : void 0, import.meta.url);
+  const { FileSystemDirectoryHandle } = await __vitePreload(() => import("./support-Blx7VymJ.js").then((n) => n.n), true ? __vite__mapDeps([1,2,3,4]) : void 0, import.meta.url);
   const rootName = (_b = (_a = fileList[0].webkitRelativePath) === null || _a === void 0 ? void 0 : _a.split("/", 1)[0]) !== null && _b !== void 0 ? _b : "";
   const root = new FolderHandle(rootName, false);
   for (let i = 0; i < fileList.length; i++) {
@@ -39,8 +40,8 @@ async function makeDirHandleFromFileList(fileList) {
   return new FileSystemDirectoryHandle(root);
 }
 async function makeFileHandlesFromFileList(fileList) {
-  const { FileHandle } = await __vitePreload(() => import("./memory-CoF3QhKB.js"), true ? __vite__mapDeps([0,1,2]) : void 0, import.meta.url);
-  const { FileSystemFileHandle } = await __vitePreload(() => import("./index-By0_pP4f.js").then((n) => n.F), true ? __vite__mapDeps([1,2]) : void 0, import.meta.url);
+  const { FileHandle } = await __vitePreload(() => import("./memory-BgIWg3VE.js"), true ? __vite__mapDeps([0,1,2,3,4]) : void 0, import.meta.url);
+  const { FileSystemFileHandle } = await __vitePreload(() => import("./support-Blx7VymJ.js").then((n) => n.F), true ? __vite__mapDeps([1,2,3,4]) : void 0, import.meta.url);
   const files = Array.from(fileList).map((file) => new FileSystemFileHandle(new FileHandle(file.name, file, false)));
   return files;
 }

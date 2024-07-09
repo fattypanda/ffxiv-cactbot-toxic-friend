@@ -6,7 +6,11 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
-import {fileURLToPath, resolve} from "node:url";
+import {fileURLToPath} from "node:url";
+import {dirname, resolve} from "node:path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -30,9 +34,9 @@ export default defineConfig({
 		minify: false,
 		rollupOptions: {
 			input: {
-				index: resolve(__dirname, 'index.html'),
-				main: resolve(__dirname, 'main.html'),
-				setting: resolve(__dirname, 'setting.html'),
+				index: resolve(__dirname, './index.html'),
+				main: resolve(__dirname, './main.html'),
+				setting: resolve(__dirname, './setting.html'),
 			}
 		}
 	}

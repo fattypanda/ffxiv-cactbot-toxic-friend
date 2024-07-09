@@ -42,7 +42,7 @@
 <script lang="ts" setup>
 import ElGlobalConfig from "@/components/el-global-config.vue";
 
-import {computed, nextTick, ref, watchEffect} from "vue";
+import {computed, nextTick, ref, toRaw, watchEffect} from "vue";
 import {Bus} from "@/Bus";
 import {parsed15or16} from "@/regexes";
 import useRules from "@/hooks/useRules";
@@ -53,9 +53,7 @@ const {
 
 const running = ref(false);
 const show = ref(true);
-const logs = ref<string[]>([
-	'1', '2', '3'
-]);
+const logs = ref<string[]>([]);
 
 const first = computed(() => {
 	return logs.value?.[0] || '';
@@ -67,10 +65,15 @@ const others = computed(() => {
 
 function start () {
 	running.value = true;
+	
+	const _rules = rules.value.filter(v => v.use).map(v => toRaw(v));
+	bus.start(_rules);
 }
 
 function stop () {
 	running.value = false;
+	logs.value = [];
+	bus.stop();
 }
 
 function restart () {
@@ -93,7 +96,11 @@ function test () {
 	bus.handle('[23:43:04.034] ActionEffect 15:104FFD4F:友人A:38:崩拳:40008F1A:欧米茄:00736003:39720000:F:6B8000:0:0:0:0:0:0:0:0:0:0:0:0:797663:8557964:10000:10000:::100.11:99.96:0.00:-3.12:75543:75543:10000:10000:::103.72:110.03:0.00:-2.80:000083E9:0:1', parsed15or16);
 }
 
-const bus = new Bus();
+const bus = new Bus({
+	echo (v) {
+		logs.value = [v, ...logs.value];
+	}
+});
 </script>
 
 <style lang="less">

@@ -62,6 +62,7 @@ export default function useRules () {
 	
 	onMounted(() => {
 		window.addEventListener('message', handleMessage);
+		rules.value = actions.parse(storage.get());
 	});
 	
 	onUnmounted(() => {

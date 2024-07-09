@@ -5,13 +5,16 @@ import PostNamazu from "@/libs/ngld/PostNamazu";
 import _ from 'lodash-es';
 import {IThan} from "@/dict";
 
+type EchoFunc = (echo: string) => any;
+
 export class Bus {
 	
 	public rules: IRow[] = [];
 	public debug: boolean = false;
+	public echo?: EchoFunc;
 	
-	constructor() {
-	
+	constructor(opts?: {echo: EchoFunc}) {
+		this.echo = opts?.echo;
 	}
 	
 	start (rules: IRow[]) {
@@ -31,6 +34,7 @@ export class Bus {
 	
 	postNamazu(echo: string) {
 		PostNamazu('command', echo);
+		this.echo?.(echo);
 	}
 	
 	handle (log: string, analysis = network21or22) {
