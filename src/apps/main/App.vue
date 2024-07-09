@@ -52,7 +52,7 @@ const {
 } = useRules();
 
 const running = ref(false);
-const show = ref(true);
+const show = ref(false);
 const logs = ref<string[]>([]);
 
 const first = computed(() => {

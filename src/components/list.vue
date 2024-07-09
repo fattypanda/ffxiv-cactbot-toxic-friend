@@ -75,10 +75,10 @@ const createId = () => uniqueId('id-');
 const createForm = (row: Partial<IRow>, cid = true) => ({
 	...(cid? { id: createId()}: {}),
 	use: false,
-	echo: `/p $\{player} 使用了 $\{skill} ，直暴了 $\{damage} 点伤害。`,
+	echo: `/p $\{player} 使用了 $\{skill} ，直暴了 $\{damage} 点伤害。<se.1>`,
 	player: '',
 	skill: '',
-	damage: '10000',
+	damage: '100000',
 	flag: '60',
 	than: '>',
 	...row,
@@ -202,7 +202,15 @@ function useDefaultData () {
 			flag: '60',
 			damage: '0',
 			than: '>',
-			echo: '/p $\{player} 居然浪费了宝贵的直暴在普通攻击上！而且仅仅造成了 $\{damage} 点伤害。'
+			echo: '/p $\{player} 居然浪费了宝贵的直暴在普通攻击上！而且仅仅造成了 $\{damage} 点伤害。<se.11>'
+		}, true),
+		createForm({
+			use: true,
+			skill: '',
+			flag: '60',
+			damage: '5000',
+			than: '<',
+			echo: `/p $\{player} 的 $\{skill} 直暴了 $\{damage} 点伤害。`
 		}, true)
 	];
 }
