@@ -11,7 +11,7 @@ export class Bus {
 	public debug: boolean = false;
 	
 	constructor() {
-
+	
 	}
 	
 	start (rules: IRow[]) {

@@ -3,13 +3,12 @@ html, body, #app {
 	height: 100%;
 }
 
-html, body {
 
-	//background: white;
+html {
+	line-height: 1;
 
 	.el-dialog {
 		--el-dialog-border-radius: 0;
-		--el-dialog-bg-color: rgba(0, 0, 0, 1);
 	}
 
 	.el-popper {
@@ -17,11 +16,6 @@ html, body {
 	}
 
 	--el-border-radius-base: 0;
-	--el-bg-color: rgba(0, 0, 0, .3);
-
-	.el-table {
-		--el-table-header-text-color: var(--el-text-color-primary);
-	}
 
 	.el-table--small .el-table__cell {
 		padding: 0;
@@ -34,5 +28,30 @@ html, body {
 	.el-button+.el-button {
 		margin-left: 1px;
 	}
+
+	.el-button--small {
+		--el-button-size: initial;
+		height: 18px;
+		padding: 2px 4px;
+		line-height: 1;
+	}
 }
+
+html.dark {
+
+	body {
+		background: white;
+	}
+
+	.el-dialog {
+		--el-dialog-bg-color: rgba(0, 0, 0, 1);
+	}
+
+	--el-bg-color: rgba(0, 0, 0, .3);
+
+	.el-table {
+		--el-table-header-text-color: var(--el-text-color-primary);
+	}
+}
+
 
