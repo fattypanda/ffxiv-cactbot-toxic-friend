@@ -32,7 +32,7 @@ const actions = {
     return {
       ...cid ? { id: actions.createId() } : {},
       use: false,
-      echo: `/p \${player} 使用了 \${skill} ，直暴了 \${damage} 点伤害。`,
+      echo: `/p \${player} 使用了 \${skill} ，直暴了 \${damage} 点伤害。<se.1>`,
       player: "",
       skill: "",
       damage: "10000",

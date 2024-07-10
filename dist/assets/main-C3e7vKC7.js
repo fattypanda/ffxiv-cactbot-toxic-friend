@@ -1,6 +1,6 @@
 import { d as defineComponent, r as ref, c as computed, i as createBlock, w as withCtx, a as openBlock, f as createBaseVNode, e as createVNode, b as createElementBlock, g as createTextVNode, F as Fragment, p as toDisplayString, q as withDirectives, v as vShow, h as renderList, T as Transition, t as toRaw, n as nextTick, E as ElButton, x as ElButtonGroup, y as createApp } from "./zh-cn-CoCz9NQl.js";
 import { B as Bus, p as parsed15or16 } from "./Bus-BHiBqukI.js";
-import { u as useRules, _ as _sfc_main$1 } from "./useRules-oMW3-5EA.js";
+import { u as useRules, _ as _sfc_main$1 } from "./useRules-CZ0LXt7M.js";
 const _hoisted_1 = { class: "container" };
 const _hoisted_2 = { class: "header" };
 const _hoisted_3 = { class: "left" };
@@ -17,7 +17,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       rules
     } = useRules();
     const running = ref(false);
-    const show = ref(true);
+    const show = ref(false);
     const logs = ref([]);
     const first = computed(() => {
       var _a;

@@ -1,6 +1,6 @@
 import { bo as buildProps, d as defineComponent, bp as useNamespace, c as computed, bq as h, br as renderSlot, r as ref, bs as watchEffect, bt as isArray, bu as isNumber, e as createVNode, bv as isVNode, g as createTextVNode, bw as definePropType, bx as isString, by as componentSizes, bz as withInstall, s as shallowRef, o as onMounted, i as createBlock, w as withCtx, a as openBlock, u as unref, f as createBaseVNode, b as createElementBlock, h as renderList, F as Fragment, n as nextTick, E as ElButton, x as ElButtonGroup, y as createApp } from "./zh-cn-CoCz9NQl.js";
 import { P as PatchFlags, k as isFragment, l as isValidElementNode, r as rowToRule, o as options, A as AInputAction, s as showOpenFilePicker, h as ElMessage, i as download, E as ElCheckbox, a as ElTableColumn, b as ElTable, c as ElSelect, d as ElInput, e as ElFormItem, f as ElForm, g as ElDialog, j as ElOption } from "./support-Blx7VymJ.js";
-import { u as useRules, a as useRulesSelect, _ as _sfc_main$1, b as actions, s as storage } from "./useRules-oMW3-5EA.js";
+import { u as useRules, a as useRulesSelect, _ as _sfc_main$1, b as actions, s as storage } from "./useRules-CZ0LXt7M.js";
 const spaceItemProps = buildProps({
   prefixCls: {
     type: String
@@ -294,7 +294,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         flag: "60",
         damage: "0",
         than: ">",
-        echo: "/p ${player} 居然浪费了宝贵的直暴在普通攻击上！而且仅仅造成了 ${damage} 点伤害。"
+        echo: "/p ${player} 居然浪费了宝贵的直暴在普通攻击上！而且仅仅造成了 ${damage} 点伤害。<se.11>"
+      }, true), actions.createRule({
+        use: true,
+        skill: "",
+        flag: "60",
+        damage: "5000",
+        than: "<",
+        echo: `/p \${player} 的 \${skill} 直暴了 \${damage} 点伤害。<se.11>`
       }, true)];
     }
     onMounted(() => {
